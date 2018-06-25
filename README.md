@@ -1,4 +1,4 @@
-# Serverless Stack Demo API
+# Fly Box API (v2) Serverless
 
 
 
@@ -63,6 +63,6 @@ functions:
   update: fb-dev-api-2-dev-update
 
   delete: fb-dev-api-2-dev-delete
-  
+
   billing: fb-dev-api-2-dev-billing
   
