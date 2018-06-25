@@ -1,4 +1,4 @@
-service: notes-app-2-api
+service: fb-dev-api-2
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -32,8 +32,7 @@ provider:
   # under process.env.
   environment:
     tableName:
-      Ref: NotesTable
-    stripeSecretKey: ${self:custom.environment.stripeSecretKey}
+      Ref: TripTable
 
   iamRoleStatements:
     - Effect: Allow
@@ -48,7 +47,7 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ NotesTable, Arn ]
+        - "Fn::GetAtt": [ TripTable, Arn ]
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
@@ -61,7 +60,7 @@ functions:
     handler: create.main
     events:
       - http:
-          path: notes
+          path: create
           method: post
           cors: true
           authorizer: aws_iam
@@ -73,8 +72,8 @@ functions:
     handler: get.main
     events:
       - http:
-          path: notes/{id}
-          method: get
+          path: getTrip
+          method: post
           cors: true
           authorizer: aws_iam
 
@@ -85,7 +84,7 @@ functions:
     handler: list.main
     events:
       - http:
-          path: notes
+          path: listTrips
           method: get
           cors: true
           authorizer: aws_iam
@@ -97,7 +96,7 @@ functions:
     handler: update.main
     events:
       - http:
-          path: notes/{id}
+          path: update/{id}
           method: put
           cors: true
           authorizer: aws_iam
@@ -109,7 +108,7 @@ functions:
     handler: delete.main
     events:
       - http:
-          path: notes/{id}
+          path: delete/{id}
           method: delete
           cors: true
           authorizer: aws_iam
