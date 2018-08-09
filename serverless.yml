@@ -72,8 +72,8 @@ functions:
     handler: get.main
     events:
       - http:
-          path: getTrip
-          method: post
+          path: getTrip/{cognitoIdentityId}/{tripId}
+          method: get
           cors: true
           authorizer: aws_iam
 
@@ -84,7 +84,7 @@ functions:
     handler: list.main
     events:
       - http:
-          path: listTrips
+          path: listTrips/{cognitoIdentityId}
           method: get
           cors: true
           authorizer: aws_iam
@@ -108,7 +108,7 @@ functions:
     handler: delete.main
     events:
       - http:
-          path: delete/{id}
+          path: delete/{id}/
           method: delete
           cors: true
           authorizer: aws_iam

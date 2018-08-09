@@ -11,17 +11,15 @@ export async function main(event, context, callback) {
         tripId: data.tripName,
         text: data.text,
         coordinates: data.coordinateArray,
-        imageUrl:data.imageUrl,
+        imageUrl: data.imageUrl,
         // attachment: data.attachment,
         createdAt: Date.now()
     }
   };
 
-  const dummy={hello:'hi'};
-
   try {
     await dynamoDbLib.call("put", params);
-    callback(null, success(dummy));
+    callback(null, success(params.Item));
   } catch (e) {
     callback(null, failure({ status: false }));
   }

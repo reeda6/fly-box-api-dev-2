@@ -12,7 +12,7 @@ export async function main(event, context, callback) {
     //   of the authenticated user
     KeyConditionExpression: "userId = :userId",
     ExpressionAttributeValues: {
-      ":userId": event.requestContext.identity.cognitoIdentityId
+      ":userId": event.pathParameters.cognitoIdentityId
     }
   };
 
